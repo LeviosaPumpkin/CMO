@@ -16,13 +16,13 @@ public:
 	Device (const double lambda_, const int num_)
 	{
 		lambda = lambda_;
-		num = num;
+		num = num_;
 		timeOfRelease = 0;
 		timeOfService = 0;
 	}
-	void Service()
+	void Service(double gt)
 	{
-		timeOfService = 1 - exp(-lambda*timeOfService);
+		timeOfService = 1 - exp(-lambda*gt);
 		timeOfRelease += timeOfService;
 	}
 	double GetTimeOfRelease()
@@ -37,6 +37,10 @@ public:
 	{
 		timeOfRelease = 0;
 		timeOfService = 0;
+	}
+	friend std::ostream & operator << (std::ostream & out, const Device & device)
+	{
+		return out << device.num << "\n";
 	}
 };
 #endif

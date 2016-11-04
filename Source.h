@@ -4,8 +4,6 @@
 #include<iostream>
 #include "Order.h"
 
-double globalTime;
-
 class Source
 {
 private:
@@ -38,6 +36,10 @@ public:
 	{
 		return numOfRefuse;
 	}
+	int GetNumOfSucceed()
+	{
+		return numOfSuceed;
+	}
 	/*double GetTime()
 	{
 		return time;
@@ -50,13 +52,13 @@ public:
 	{
 		return timeOfArrive;
 	}*/
-	Order Generate()
+	Order Generate(double & gt)
 	{
-		double time = t1 + (t2 - t1)*rand()/ RAND_MAX;
+		double time = t1 + (t2 - t1)*rand()/ RAND_MAX/10000;
 		//timeOfArrive += time;
-		globalTime += time;
-		std::cout << "Source " << num << " Order " << numOfOrders << " TimeOfArrive " << globalTime << '\n';
-		Order order(num, numOfOrders, globalTime);
+		gt += time;
+		std::cout << "Source " << num << " Order " << numOfOrders << " TimeOfArrive " << gt << '\n';
+		Order order(num, numOfOrders, gt);
 		++numOfOrders;
 		return order;
 	}

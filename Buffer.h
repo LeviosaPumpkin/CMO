@@ -3,12 +3,13 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <iterator>
 #include "Order.h"
 class Buffer
 {
 private:
 	int size;
-	std::vector<Order> buffer;
+	//std::vector<Order> buffer;
 	int FindOrderToRefuse(Order order)
 	{
 		int orderToRefuse = 0;
@@ -40,6 +41,7 @@ private:
 		return orderToRefuse;
 	}
 public:
+	std::vector<Order> buffer;
 	Buffer(const int size_)
 	{
 		size = size_;
