@@ -78,6 +78,10 @@ public:
 	{
 		++numOfRefuse;
 	}
+	void IncNumOfOrders()
+	{
+		++numOfOrders;
+	}
 	void Clear()
 	{
 		numOfOrders = 0;
