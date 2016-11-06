@@ -7,8 +7,8 @@
 class Source
 {
 private:
-	double t1=0.5;
-	double t2=0.8;
+	double t1 = 0.5;
+	double t2 = 0.8;
 	int numOfOrders;
 	int numOfRefuse;
 	int numOfSuceed;
@@ -22,11 +22,11 @@ public:
 	Source(int num_)
 	{
 		num = num_;
-		numOfOrders=0;
-		numOfRefuse=0;
-		numOfSuceed=0;
-		timeOfWaiting=0;
-		timeOfArrive=0;
+		numOfOrders = 0;
+		numOfRefuse = 0;
+		numOfSuceed = 0;
+		timeOfWaiting = 0;
+		timeOfArrive = 0;
 	}
 	int GetNumOfOrders()
 	{
@@ -42,22 +42,22 @@ public:
 	}
 	/*double GetTime()
 	{
-		return time;
+	return time;
 	}
 	double GetTimeOfWaiting()
 	{
-		return timeOfWaiting;
+	return timeOfWaiting;
 	}
 	double GetTimeOfArrive()
 	{
-		return timeOfArrive;
+	return timeOfArrive;
 	}*/
 	Order Generate(double & gt)
 	{
-		double time = t1 + (t2 - t1)*rand()/ RAND_MAX/10000;
+		double time = t1 + (t2 - t1)*rand() / RAND_MAX / 10000;
 		//timeOfArrive += time;
 		gt += time;
-		std::cout << "Source " << num << " Order " << numOfOrders << " TimeOfArrive " << gt << '\n';
+		//std::cout << "Source " << num << " Order " << numOfOrders << " TimeOfArrive " << gt << '\n';
 		Order order(num, numOfOrders, gt);
 		++numOfOrders;
 		return order;

@@ -13,7 +13,7 @@ public:
 	{
 
 	};
-	Device (const double lambda_, const int num_)
+	Device(const double lambda_, const int num_)
 	{
 		lambda = lambda_;
 		num = num_;

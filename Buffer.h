@@ -19,7 +19,7 @@ private:
 			{
 				orderToRefuse = i;
 			}
-			if (buffer[orderToRefuse].GetNumOfSource() == buffer[i].GetNumOfSource())
+			else if (buffer[orderToRefuse].GetNumOfSource() == buffer[i].GetNumOfSource())
 			{
 				if (buffer[orderToRefuse].GetTimeOfArrive() < buffer[i].GetTimeOfArrive())
 				{
@@ -31,7 +31,7 @@ private:
 		{
 			orderToRefuse = -1;
 		}
-		if (buffer[orderToRefuse].GetNumOfSource() == order.GetNumOfSource())
+		else if (buffer[orderToRefuse].GetNumOfSource() == order.GetNumOfSource())
 		{
 			if (buffer[orderToRefuse].GetTimeOfArrive() < order.GetTimeOfArrive())
 			{
@@ -73,7 +73,7 @@ public:
 		//Order order = *(std::min(buffer.begin(), buffer.end(), &Buffer::Comparator));
 		if (buffer.empty())
 		{
-			Order order(-1,-1,-1);
+			Order order(-1, -1, -1);
 			return order;
 
 		}
@@ -97,7 +97,7 @@ public:
 	}
 	/*bool Comparator(Order lhs, Order rhs)
 	{
-		return lhs.GetTimeOfArrive() < rhs.GetTimeOfArrive();
+	return lhs.GetTimeOfArrive() < rhs.GetTimeOfArrive();
 	}*/
 };
 #endif

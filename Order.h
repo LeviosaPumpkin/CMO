@@ -29,7 +29,7 @@ public:
 	}
 	friend std::ostream & operator << (std::ostream & out, const Order & order)
 	{
-		return out << order.numOfSource << " " << order.numInSource << " " << order.timeOfArrive <<"\n";
+		return out << order.numOfSource << " " << order.numInSource << " " << order.timeOfArrive << "\n";
 	}
 	friend bool operator == (const Order& left, const Order& right);
 };
