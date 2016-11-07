@@ -6,6 +6,8 @@ class Device
 private:
 	double timeOfService;
 	double timeOfRelease;
+	double avService;
+	int orders;
 	double lambda;
 	int num;
 public:
@@ -19,11 +21,24 @@ public:
 		num = num_;
 		timeOfRelease = 0;
 		timeOfService = 0;
+		avService = 0;
+		orders = 0;
 	}
-	void Service(double gt)
+	void Service(double & gt)
 	{
 		timeOfService = 1 - exp(-lambda*gt);
 		timeOfRelease += timeOfService;
+		avService += timeOfService;
+		++orders;
+		//gt += timeOfService;
+	}
+	double GetAvService()
+	{
+		return avService / (orders*1.0);
+	}
+	int GetOrders()
+	{
+		return orders;
 	}
 	double GetTimeOfRelease()
 	{
@@ -41,6 +56,8 @@ public:
 	{
 		timeOfRelease = 0;
 		timeOfService = 0;
+		avService = 0;
+		orders = 0;
 	}
 	friend std::ostream & operator << (std::ostream & out, const Device & device)
 	{
