@@ -16,6 +16,7 @@ private:
 	//double time;
 	double timeOfWaiting;
 	double timeOfArrive;
+	double timeOfService;
 public:
 	Source()
 	{}
@@ -27,6 +28,7 @@ public:
 		numOfSuceed = 0;
 		timeOfWaiting = 0;
 		timeOfArrive = 0;
+		timeOfService = 0;
 	}
 	int GetNumOfOrders()
 	{
@@ -40,10 +42,6 @@ public:
 	{
 		return numOfSuceed;
 	}
-	/*double GetTime()
-	{
-	return time;
-	}
 	double GetTimeOfWaiting()
 	{
 	return timeOfWaiting;
@@ -51,7 +49,11 @@ public:
 	double GetTimeOfArrive()
 	{
 	return timeOfArrive;
-	}*/
+	}
+	double GetTimeOfService()
+	{
+		return timeOfService;
+	}
 	Order Generate(double & gt)
 	{
 		double time = t1 + (t2 - t1)*rand() / RAND_MAX / 10000;
@@ -62,9 +64,17 @@ public:
 		++numOfOrders;
 		return order;
 	}
-	void UpDateTimeOfWaiting(double timeOfRelease, double timeOfService)
+	void UpDateTimeOfWaitingAndService(double tR, double tS)
 	{
-		timeOfWaiting = timeOfWaiting + timeOfRelease - timeOfService;
+		timeOfService += tS;
+		if (numOfOrders > 700)
+		{
+			timeOfWaiting = timeOfArrive + tR - tS;
+		}
+		else
+		{
+			timeOfWaiting = timeOfArrive + tR - tS;
+		}
 	}
 	int GetNum()
 	{

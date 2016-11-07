@@ -70,7 +70,6 @@ public:
 	}
 	Order Take()
 	{
-		//Order order = *(std::min(buffer.begin(), buffer.end(), &Buffer::Comparator));
 		if (buffer.empty())
 		{
 			Order order(-1, -1, -1);
@@ -95,9 +94,5 @@ public:
 	{
 		buffer.clear();
 	}
-	/*bool Comparator(Order lhs, Order rhs)
-	{
-	return lhs.GetTimeOfArrive() < rhs.GetTimeOfArrive();
-	}*/
 };
 #endif

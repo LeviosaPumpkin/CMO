@@ -29,6 +29,10 @@ public:
 	{
 		return timeOfRelease;
 	}
+	double GetTimeOfService()
+	{
+		return timeOfService;
+	}
 	int GetNum()
 	{
 		return num;
