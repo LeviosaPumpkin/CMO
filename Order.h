@@ -19,15 +19,15 @@ public:
 	//{
 	//	return timeOfWaiting;
 	//}
-	double GetTimeOfArrive()
+	double GetTimeOfArrive() const
 	{
 		return timeOfArrive;
 	}
-	int GetNumOfSource()
+	int GetNumOfSource() const
 	{
 		return numOfSource;
 	}
-	friend std::ostream & operator << (std::ostream & out, const Order & order)
+	friend std::ostream & operator << (std::ostream & out, const Order & order) 
 	{
 		return out << order.numOfSource << " " << order.numInSource << " " << order.timeOfArrive << "\n";
 	}

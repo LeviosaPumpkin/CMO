@@ -30,34 +30,34 @@ public:
 		timeOfArrive = 0;
 		timeOfService = 0;
 	}
-	int GetNumOfOrders()
+	int GetNumOfOrders() const
 	{
 		return numOfOrders;
 	}
-	int GetNumOfRefuse()
+	int GetNumOfRefuse() const
 	{
 		return numOfRefuse;
 	}
-	int GetNumOfSucceed()
+	int GetNumOfSucceed() const
 	{
 		return numOfSuceed;
 	}
-	double GetTimeOfWaiting()
+	double GetTimeOfWaiting() const
 	{
 	return timeOfWaiting;
 	}
-	double GetTimeOfArrive()
+	double GetTimeOfArrive() const
 	{
 	return timeOfArrive;
 	}
-	double GetTimeOfService()
+	double GetTimeOfService() const
 	{
 		return timeOfService;
 	}
 	Order Generate(double & gt)
 	{
-		double time = t1 + (t2 - t1)*rand() / RAND_MAX / 10000;
-		//timeOfArrive += time;
+		double time = t1 + (t2 - t1)* (double) rand() / (double) RAND_MAX;
+		timeOfArrive += time;
 		gt += time;
 		//std::cout << "Source " << num << " Order " << numOfOrders << " TimeOfArrive " << gt << '\n';
 		Order order(num, numOfOrders, gt);
@@ -67,16 +67,9 @@ public:
 	void UpDateTimeOfWaitingAndService(double tR, double tS)
 	{
 		timeOfService += tS;
-		if (numOfOrders > 700)
-		{
-			timeOfWaiting = timeOfArrive + tR - tS;
-		}
-		else
-		{
-			timeOfWaiting = timeOfArrive + tR - tS;
-		}
+		timeOfWaiting = timeOfArrive + tR - tS;
 	}
-	int GetNum()
+	int GetNum() const
 	{
 		return num;
 	}
@@ -100,7 +93,7 @@ public:
 		timeOfWaiting = 0;
 		timeOfArrive = 0;
 	}
-	friend std::ostream & operator << (std::ostream & out, const Source & source)
+	friend std::ostream & operator << (std::ostream & out, const Source & source) 
 	{
 		return out << source.num << "\n";
 	}

@@ -65,14 +65,14 @@ bool CanContinue(std::vector<Source> & s)
 }
 int main()
 {
-	srand(static_cast<unsigned int>(time(NULL)));
-	int numOfSources;
+	//srand(static_cast<unsigned int>(time(NULL)));
+	/*int numOfSources;
 	int bufferSize;
 	int numOfDevices;
 	double lambdaOfDevice;
 	double globalTime = 0;
-	int mode;
-	std::cout << "Number of sources: ";
+	int mode;*/
+	/*std::cout << "Number of sources: ";
 	std::cin >> numOfSources;
 	std::cout << "Size of buffer: ";
 	std::cin >> bufferSize;
@@ -82,8 +82,14 @@ int main()
 	std::cin >> lambdaOfDevice;
 	std::cout << "Choose mode: 0 - automatic 1 - step ";
 	std::cin >> mode;
-	std::cout << std::endl;
+	std::cout << std::endl;*/
 
+	int numOfSources =100;
+	int bufferSize=2;
+	int numOfDevices=3;
+	double lambdaOfDevice=0.02;
+	double globalTime = 0;
+	int mode=0;
 	std::vector<Source> sources;
 	Buffer buffer(bufferSize);
 	std::vector<Device> devices;

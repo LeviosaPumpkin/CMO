@@ -68,7 +68,7 @@ public:
 			}
 		}
 	}
-	Order Take()
+	Order Take() 
 	{
 		if (buffer.empty())
 		{

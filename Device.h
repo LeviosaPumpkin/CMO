@@ -1,5 +1,6 @@
 #ifndef DEVICE_H
 #define DEVICE_H
+#include <cmath>
 #include "Order.h"
 class Device
 {
@@ -26,29 +27,29 @@ public:
 	}
 	void Service(double & gt)
 	{
-		timeOfService = 1 - exp(-lambda*gt);
+		timeOfService = - log((double)rand()/(double) RAND_MAX)/lambda;
 		timeOfRelease += timeOfService;
 		avService += timeOfService;
 		++orders;
-		//gt += timeOfService;
+		gt += timeOfService;
 	}
-	double GetAvService()
+	double GetAvService() const
 	{
 		return avService / (orders*1.0);
 	}
-	int GetOrders()
+	int GetOrders() const
 	{
 		return orders;
 	}
-	double GetTimeOfRelease()
+	double GetTimeOfRelease() const
 	{
 		return timeOfRelease;
 	}
-	double GetTimeOfService()
+	double GetTimeOfService() const
 	{
 		return timeOfService;
 	}
-	int GetNum()
+	int GetNum() const
 	{
 		return num;
 	}
