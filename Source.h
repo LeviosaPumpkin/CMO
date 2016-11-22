@@ -1,7 +1,8 @@
 #ifndef SOURCE_H
 #define SOURCE_H
 #include <cstdlib>
-#include<iostream>
+#include <iostream>
+#include <math.h>
 #include "Order.h"
 
 class Source
@@ -17,6 +18,10 @@ private:
 	double timeOfWaiting;
 	double timeOfArrive;
 	double timeOfService;
+	double dTimeOfWaiting;
+	double dTimeOfService;
+	double prevAvWait;
+	double prevAvSev;
 public:
 	Source()
 	{}
@@ -29,6 +34,10 @@ public:
 		timeOfWaiting = 0;
 		timeOfArrive = 0;
 		timeOfService = 0;
+		dTimeOfWaiting = 0;
+		dTimeOfService = 0;
+		prevAvWait = 0;
+		prevAvSev = 0;
 	}
 	int GetNumOfOrders() const
 	{
@@ -54,6 +63,14 @@ public:
 	{
 		return timeOfService;
 	}
+	double GetdTimeOfService() const
+	{
+		return dTimeOfService;
+	}
+	double GetdTimeOfWaiting() const
+	{
+		return dTimeOfWaiting;
+	}
 	Order Generate(double & gt)
 	{
 		double time = t1 + (t2 - t1)* (double) rand() / (double) RAND_MAX;
@@ -67,7 +84,18 @@ public:
 	void UpDateTimeOfWaitingAndService(double tR, double tS)
 	{
 		timeOfService += tS;
-		timeOfWaiting = timeOfArrive + tR - tS;
+		double tW = timeOfArrive + tR - tS;
+		timeOfWaiting += tW;
+		//timeOfWaiting = timeOfArrive + tR - tS;
+		if (numOfOrders > 1)
+		{
+			dTimeOfWaiting = (double)(numOfOrders - 2) / (double)(numOfOrders - 1)*dTimeOfWaiting 
+				+ 1 / (double)numOfOrders*powf(tW - prevAvWait, 2);
+			dTimeOfService = (double)(numOfOrders - 2) / (double)(numOfOrders - 1)*dTimeOfService 
+				+ 1 / (double)numOfOrders*powf(tW - timeOfService, 2);
+		}
+		prevAvWait = (prevAvWait*(numOfOrders - 1) + tW) / (double)numOfOrders;
+		prevAvSev = (prevAvSev*(numOfOrders - 1) + tW) / (double)numOfOrders;
 	}
 	int GetNum() const
 	{

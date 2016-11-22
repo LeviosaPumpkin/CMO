@@ -7,6 +7,7 @@ class Device
 private:
 	double timeOfService;
 	double timeOfRelease;
+	double startTime;
 	double avService;
 	int orders;
 	double lambda;
@@ -24,14 +25,20 @@ public:
 		timeOfService = 0;
 		avService = 0;
 		orders = 0;
+		startTime = 0;
 	}
 	void Service(double & gt)
 	{
+		if (orders == 0) startTime = gt;
 		timeOfService = - log((double)rand()/(double) RAND_MAX)/lambda;
 		timeOfRelease += timeOfService;
 		avService += timeOfService;
 		++orders;
-		gt += timeOfService;
+		gt = timeOfRelease;
+	}
+	double GetStartTime() const
+	{
+		return startTime;
 	}
 	double GetAvService() const
 	{
