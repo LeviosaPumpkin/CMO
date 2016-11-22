@@ -66,6 +66,7 @@ public:
 		timeOfService = 0;
 		avService = 0;
 		orders = 0;
+		startTime = 0;
 	}
 	friend std::ostream & operator << (std::ostream & out, const Device & device)
 	{

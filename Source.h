@@ -120,6 +120,10 @@ public:
 		numOfSuceed = 0;
 		timeOfWaiting = 0;
 		timeOfArrive = 0;
+		dTimeOfWaiting = 0;
+		dTimeOfService = 0;
+		prevAvWait = 0;
+		prevAvSev = 0;
 	}
 	friend std::ostream & operator << (std::ostream & out, const Source & source) 
 	{
