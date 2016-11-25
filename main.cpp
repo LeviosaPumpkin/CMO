@@ -60,12 +60,12 @@ bool NeedContinue(double p0, double p1)
 {
 	if (abs(p0 - p1) < 0.1) return false;
 }
-double CountP(std::vector<Source> & sou)
+double CountP(std::vector<Source> & sou, int allOrders)
 {
 	double sum = 0;
-	for (int i = 0; i < sou.size(); ++i) 
-		sum = sum + (sou[i].GetNumOfRefuse() / (double)sou[i].GetNumOfOrders());
-	return sum / sou.size();
+	for (int i = 0; i < sou.size(); ++i)
+		sum += sou[i].GetNumOfRefuse();
+	return sum / allOrders;
 }
 int main()
 {
@@ -92,9 +92,8 @@ int main()
 	int bufferSize=3;
 	int numOfDevices=3;
 	double lambdaOfDevice=0.01;
-	double globalTime = 0;
 	int mode=0;
-	int allOrders = 100;
+	int allOrders = 1000;
 	int k = 0;
 	std::vector<Source> sources;
 	Buffer buffer(bufferSize);
@@ -116,12 +115,14 @@ int main()
 	//big circle
 	while (NeedContinue(p0, p1))
 	{
+		double globalTime = 0;
 		for (int j = 0; j < numOfSources; ++j)
 		{
 			orders.push_back(sources[j].Generate(globalTime));
 			++k;
 		}
-		double starttime = sources[0].GetTimeOfArrive();
+		double starttime = (*std::min_element(sources.begin(), sources.end(), [](Source l, Source r)
+		{ return l.GetTimeOfArrive() < r.GetTimeOfArrive(); })).GetTimeOfArrive();
 		while (k < allOrders)
 		{
 			Order order = orders[ChooseSource(orders)];
@@ -204,7 +205,7 @@ int main()
 		}
 		double endtime = endtime = (*std::max_element(devices.begin(), devices.end(), [](Device l, Device r) 
 			{ return l.GetTimeOfRelease() < r.GetTimeOfRelease(); })).GetTimeOfRelease();
-		p0 = CountP(sources);
+		p0 = CountP(sources, allOrders);
 		std::cout << " p0 = " << p0;
 		std::cout << " N = " << allOrders << '\n';
 		allOrders = CountN(p0);
@@ -214,6 +215,7 @@ int main()
 		orders.clear();
 		buffer.Clear();
 		k = 0;
+		globalTime = 0;
 
 		////////////////////////////////////////////////////////////////
 		deviceToUse = 0;
@@ -222,7 +224,8 @@ int main()
 			orders.push_back(sources[j].Generate(globalTime));
 			++k;
 		}
-		starttime = sources[0].GetTimeOfArrive();
+		starttime = (*std::min_element(sources.begin(), sources.end(), [](Source l, Source r)
+		{ return l.GetTimeOfArrive() < r.GetTimeOfArrive(); })).GetTimeOfArrive();
 		while (k < allOrders)
 		{
 			Order order = orders[ChooseSource(orders)];
@@ -305,7 +308,7 @@ int main()
 		}
 		endtime = (*std::max_element(devices.begin(), devices.end(), [](Device l, Device r)
 			{ return l.GetTimeOfRelease() < r.GetTimeOfRelease(); })).GetTimeOfRelease();
-		p1 = CountP(sources);
+		p1 = CountP(sources, allOrders);
 		std::cout << " p1 = " << p1;
 		std::cout << "N = " << allOrders << '\n';
 		allOrders = CountN(p1);
